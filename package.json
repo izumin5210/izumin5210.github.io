@@ -1,11 +1,25 @@
 {
   "name": "izumin.info",
-  "version": "1.0.0",
   "description": "Portfolio of Masayuki IZUMI (@izumin5210)",
+  "version": "1.0.0",
   "author": {
     "name": "Masayuki IZUMI",
     "email": "masayuki@izumin.info",
     "url": "https://github.com/izumin5210"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.7.12",
+    "coffee-script": "^1.9.3",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-if": "^1.2.5",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-minify-css": "^1.2.0",
+    "gulp-minify-html": "^1.0.3",
+    "gulp-pleeease": "^1.2.0",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-size": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2"
   },
   "license": {
     "type": "MIT",
