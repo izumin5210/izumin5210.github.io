@@ -1,5 +1,5 @@
 @mixin main-container(
-  $main-width: 960px
+  $main-width: $content-width
 ) {
   width: $main-width;
   margin: 16px auto;

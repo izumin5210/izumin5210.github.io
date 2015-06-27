@@ -1,12 +1,14 @@
 @mixin global-header(
   $icon-size: 96px
 ) {
+  padding-top: 32px;
+  margin-bottom: 48px;
   background-color: $brand-primary;
   color: #fff;
   text-align: center;
   box-shadow: $box-shadow-base;
 
-  & > .icon-container {
+  .icon-container {
     @include size($icon-size);
     margin: 0 auto;
     padding: 8px;
@@ -17,6 +19,52 @@
       display: block;
       max-width: 100%;
       height: auto;
+    }
+  }
+
+  .name-container {
+    margin: 16px;
+
+    h1 > a {
+      font-size: $font-size-large;
+      color: #fff;
+      &:hover { text-decoration: none; }
+    }
+  }
+
+  nav {
+    width: $content-width;
+    margin: 32px auto 0;
+    > ul {
+      @include list-unstyled;
+      @include clearfix;
+      font-size: $font-size-large;
+
+      > li {
+        float: left;
+        width: $content-width / 4;
+        height: 32px;
+
+        > a {
+          display: block;
+          color: rgba(#fff, .5);
+          &:hover { text-decoration: none; }
+        }
+
+        &.active {
+          & > a { color: #fff; }
+        }
+
+        &:hover,
+        &:focus {
+          @keyframes nav-border-bottom {
+            0% { border-bottom-color: rgba(#fff, 0); }
+            100% { border-bottom-color: rgba(#fff, 1); }
+          }
+          animation: nav-border-bottom .3s ease-in;
+          border-bottom: 4px solid #fff;
+        }
+      }
     }
   }
 }
