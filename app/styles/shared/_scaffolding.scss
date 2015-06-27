@@ -1,0 +1,24 @@
+@import '../../../bower_components/sanitize-css/sanitize';
+
+html {
+  font-size: $font-size-base;
+}
+
+body {
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  color: $text-color;
+  background-color: $body-bg;
+}
+
+// -- Links --------------------------------
+a {
+  color: $link-color;
+  text-decoration: $link-decoration;
+
+  &:hover,
+  &:focus {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+}
