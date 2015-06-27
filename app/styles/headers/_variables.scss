@@ -1,0 +1,17 @@
+// -- Colors --------------------------------
+$text-color:            $gray;
+$body-bg:               #fff;
+
+$link-color:            $gray-base;
+$link-hover-color:      darken($link-color, 20%);
+
+$link-decoration:       none;
+$link-hover-decoration: underline;
+
+
+// -- Typography --------------------------------
+$font-family-base:      "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック", "Yu Gothic", "メイリオ", Meiryo, Osaka, sans-serif;
+
+$font-size-base:        14px;
+$font-size-large:       ceil(($font-size-base * 1.25)); // ~18px
+$font-size-small:       ceil(($font-size-base * 0.85)); // ~12px
