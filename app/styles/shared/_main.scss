@@ -1,0 +1,56 @@
+@mixin main-container(
+  $main-width: 960px
+) {
+  width: $main-width;
+  margin: 16px auto;
+
+  section {
+    margin: 16px 0 32px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    @include before-text('#');
+    font-size: $font-size-larger;
+    padding-bottom: 6px;
+    border-bottom: 3px solid $gray-lighter;
+  }
+
+  h2 {
+    @include before-text('##');
+    font-size: $font-size-large;
+  }
+
+  h3 {
+    @include before-text('###');
+  }
+
+  li {
+    @include before-text('*');
+    list-style: none;
+  }
+
+  .list-inline {
+    @include list-inline;
+    > li {
+      &:before { content: none; }
+      &:after { content: none; }
+    }
+  }
+
+  .dl-horizontal {
+    @include dl-horizontal(80px);
+    & > dt {
+      font-weight: bold;
+    }
+  }
+}
+
+main {
+  @include main-container;
+}

@@ -13,6 +13,7 @@ $link-hover-decoration: underline;
 $font-family-base:      "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック", "Yu Gothic", "メイリオ", Meiryo, Osaka, sans-serif;
 
 $font-size-base:        14px;
+$font-size-larger:      ceil(($font-size-base * 1.7)); // ~24px
 $font-size-large:       ceil(($font-size-base * 1.25)); // ~18px
 $font-size-small:       ceil(($font-size-base * 0.85)); // ~12px
 
