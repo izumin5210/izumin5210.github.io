@@ -26,6 +26,8 @@
     "url": "http://izumin.mit-license.org/2015"
   },
   "scripts": {
+    "build": "gulp build",
+    "serve": "gulp serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
