@@ -30,6 +30,13 @@ build/Release
 node_modules
 
 
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+
 ### Ruby ###
 *.gem
 *.rbc
@@ -118,3 +125,8 @@ Temporary Items
 
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
+
+
+### misc ###
+dist
+.tmp
