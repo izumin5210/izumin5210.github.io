@@ -1,0 +1,26 @@
+@mixin global-header(
+  $icon-size: 96px
+) {
+  background-color: $brand-primary;
+  color: #fff;
+  text-align: center;
+  box-shadow: $box-shadow-base;
+
+  & > .icon-container {
+    @include size($icon-size);
+    margin: 0 auto;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: $icon-size / 2;
+
+    & > img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.global-header {
+  @include global-header;
+}
