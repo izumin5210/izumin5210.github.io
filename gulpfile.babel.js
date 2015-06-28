@@ -8,6 +8,7 @@ import source       from "vinyl-source-stream";
 import sass         from "gulp-ruby-sass";
 import browserSync  from "browser-sync";
 import path         from "path";
+import runSequence  from "run-sequence";
 
 import {appName}    from "./app/scripts/constants";
 
@@ -17,24 +18,31 @@ const reload        = browserSync.reload;
 
 
 // configuration --------------------------------
-const config = {
-  entries: {
-    css: "./app/styles/style.scss",
-    js: "./app/scripts/app.js"
-  },
-  output: {
-    js: "app.js"
-  },
-  src: "./app",
-  tmp: "./.tmp",
-  dest: "./dist"
-};
+const SRC_DIR       = path.join(__dirname, "./app");
+const TEMP_DIR      = path.join(__dirname, "./.tmp");
+const DEST_DIR      = path.join(__dirname, "./dist");
+
+const SCRIPTS_DIR   = path.join(SRC_DIR, "scripts");
+const TEMPLATES_DIR = path.join(SRC_DIR, "templates");
+const STYLES_DIR    = path.join(SRC_DIR, "styles");
+
+const SCRIPT_ENTRIES = [
+  path.join(SCRIPTS_DIR, "app.js"),
+  path.join(TEMP_DIR, "templates.js"),
+  "./node_modules/angular-route/angular-route.js"
+];
+
+const STYLE_ENTRIES = [
+  path.join(STYLES_DIR, "style.scss")
+];
+
+const OUTPUT_SCRIPT = "app.js";
 
 
 // scripts --------------------------------
 let getBundler = (opts) => {
   let browserifyOpts = {
-    entries: config.entries.js,
+    entries: SCRIPT_ENTRIES,
     debug: opts.debug,
     extensions: [".js"]
   };
@@ -47,39 +55,44 @@ let bundle = (opts) => {
 
   let rebundle = () => {
     bundler.bundle()
-      .pipe(source(config.output.js))
-      .pipe(gulp.dest(config.tmp))
+      .pipe(source(OUTPUT_SCRIPT))
+      .pipe(gulp.dest(TEMP_DIR))
       .pipe($.streamify($.uglify()))
       .pipe($.streamify($.size({title: "scripts"})))
-      .pipe(gulp.dest(config.dest))
+      .pipe(gulp.dest(DEST_DIR));
   };
 
   if (opts.watch) {
-    bundler = watchify(bundler).on("update", rebundle)
+    bundler = watchify(bundler).on("update", rebundle);
   }
   rebundle();
 }
 
 gulp.task("browserify", bundle.bind(null, { watch: false, debug: true }));
 gulp.task("watchify", bundle.bind(null, { watch: true, debug: true }));
-gulp.task("scripts", ["browserify"]);
+gulp.task("build:scripts", ["browserify"]);
 
 
 // templates --------------------------------
-gulp.task("templates", () => {
-  gulp.src(path.join(config.src, "**/*.html"))
-    .pipe($.angularTemplatecache({module: appName, base: path.join(config.src, "templates")}))
+const TEMPLATES_OPTIONS = {
+  module:   appName,
+  base:     TEMPLATES_DIR
+};
+
+gulp.task("build:templates", () => {
+  gulp.src(path.join(TEMPLATES_DIR, "**/*.html"))
+    .pipe($.angularTemplatecache(TEMPLATES_OPTIONS))
     .pipe($.size({title: "templates.js"}))
-    .pipe(gulp.dest(config.tmp));
+    .pipe(gulp.dest(TEMP_DIR));
 })
 
 
 // html --------------------------------
-gulp.task("html", () => {
-  gulp.src(`${config.src}/**/*.html`)
+gulp.task("build:html", () => {
+  gulp.src([path.join(SRC_DIR, "**/*.html"), `!${TEMPLATES_DIR}`])
     .pipe($.if("*.html", $.minifyHtml()))
-    .pipe(gulp.dest(config.dest))
-    .pipe($.size({title: "html"}))
+    .pipe(gulp.dest(DEST_DIR))
+    .pipe($.size({title: "html"}));
 });
 
 
@@ -101,28 +114,35 @@ const AUTOPREFIXER_BROWSERS = [
   "bb >= 10"
 ];
 
-gulp.task("styles", () => {
-  sass(config.entries.css, SASS_OPTIONS)
+gulp.task("build:styles", () => {
+  sass(STYLE_ENTRIES, SASS_OPTIONS)
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
-    .pipe(gulp.dest(config.tmp))
+    .pipe(gulp.dest(TEMP_DIR))
     .pipe($.if("*.css", $.minifyCss()))
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(config.dest))
-    .pipe($.size({title: "styles"}))
+    .pipe(gulp.dest(DEST_DIR))
+    .pipe($.size({title: "styles"}));
 });
 
 
 // browserSync --------------------------------
-gulp.task("serve", ["html", "styles", "watchify"], () => {
+gulp.task("serve", ["build", "watchify"], () => {
   browserSync({
-    server: [config.src, config.tmp]
+    server: [SRC_DIR, TEMP_DIR]
   });
 
-  gulp.watch(["#{config.tmp}/**/*.js"], reload);
-  gulp.watch(["#{config.src}/**/*.html"], reload);
-  gulp.watch(["#{config.src}/**/*.{scss,css}"], ["styles", reload]);
+  gulp.watch([OUTPUT_SCRIPT], reload);
+  gulp.watch([path.join(TEMPLATES_DIR, "**/*.html")], ['build:template']);
+  gulp.watch([path.join(SRC_DIR, "**/*.html"), `!${TEMPLATES_DIR}`], reload);
+  gulp.watch([path.join(STYLES_DIR, "**/*.{scss,css}")], ["build:styles", reload]);
 });
 
 
 // build --------------------------------
-gulp.task("build", ["scripts", "styles", "html"]);
+gulp.task("build", (callback) => {
+  runSequence(
+    "build:templates",
+    ["build:scripts", "build:styles", "build:html"],
+    callback
+  );
+});
