@@ -7,6 +7,9 @@ import source       from "vinyl-source-stream";
 
 import sass         from "gulp-ruby-sass";
 import browserSync  from "browser-sync";
+import path         from "path";
+
+import {appName}    from "./app/scripts/constants";
 
 
 const $             = loadPlugins();
@@ -60,6 +63,15 @@ let bundle = (opts) => {
 gulp.task("browserify", bundle.bind(null, { watch: false, debug: true }));
 gulp.task("watchify", bundle.bind(null, { watch: true, debug: true }));
 gulp.task("scripts", ["browserify"]);
+
+
+// templates --------------------------------
+gulp.task("templates", () => {
+  gulp.src(path.join(config.src, "**/*.html"))
+    .pipe($.angularTemplatecache({module: appName, base: path.join(config.src, "templates")}))
+    .pipe($.size({title: "templates.js"}))
+    .pipe(gulp.dest(config.tmp));
+})
 
 
 // html --------------------------------
