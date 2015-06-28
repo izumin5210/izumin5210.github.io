@@ -35,16 +35,18 @@
   }
 
   nav {
-    width: $content-width;
+    max-width: $content-width;
     margin: 32px auto 0;
+
     > ul {
       @include list-unstyled;
-      @include clearfix;
+      display: table;
+      table-layout: fixed;
+      width: 100%;
       font-size: $font-size-large;
 
       > li {
-        float: left;
-        width: $content-width / 4;
+        display: table-cell;
         height: $nav-height;
 
         > a {

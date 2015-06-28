@@ -1,7 +1,8 @@
 @mixin main-container(
   $main-width: $content-width
 ) {
-  width: $main-width;
+  max-width: $main-width;
+  padding: 16px;
   margin: 16px auto;
 
   section {
