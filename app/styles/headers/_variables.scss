@@ -6,11 +6,8 @@ $content-width:         960px;
 $text-color:            $gray;
 $body-bg:               #fff;
 
-$link-color:            $gray-base;
-$link-hover-color:      darken($link-color, 20%);
-
-$link-decoration:       none;
-$link-hover-decoration: underline;
+$link-color:            $brand-accent;
+$link-hover-color:      $link-color;
 
 
 // -- Typography --------------------------------

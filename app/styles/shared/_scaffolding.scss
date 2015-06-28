@@ -14,11 +14,13 @@ body {
 // -- Links --------------------------------
 a {
   color: $link-color;
-  text-decoration: $link-decoration;
+  text-decoration: none;
+  border-bottom: 1px dotted $link-color;
 
   &:hover,
   &:focus {
     color: $link-hover-color;
-    text-decoration: $link-hover-decoration;
+    border-bottom: 1px solid $link-hover-color;
+    text-decoration: none;
   }
 }
