@@ -1,6 +1,10 @@
 gulp          = require('gulp')
 $             = require('gulp-load-plugins')()
 
+browserify    = require('browserify')
+watchify      = require('watchify')
+source        = require('vinyl-source-stream')
+
 sass          = require('gulp-ruby-sass')
 browserSync   = require('browser-sync')
 reload        = browserSync.reload
@@ -10,9 +14,43 @@ reload        = browserSync.reload
 config =
   entries:
     css: './app/styles/style.scss'
+    js: './app/scripts/app.js'
+  output:
+    js: 'app.js'
   src: './app'
   tmp: './.tmp'
   dest: './dist'
+
+
+#### scripts --------------------------------
+getBundler = (opts) ->
+  browserifyOpts =
+    entries: config.entries.js
+    debug: opts.debug
+    extensions: ['.js']
+
+  browserify(browserifyOpts).transform('babelify')
+
+
+bundle = (opts) ->
+  bundler = getBundler(opts)
+
+  rebundle = ->
+    bundler.bundle()
+      .pipe(source(config.output.js))
+      .pipe(gulp.dest(config.tmp))
+      .pipe($.streamify($.uglify()))
+      .pipe($.streamify($.size(title: 'scripts')))
+      .pipe(gulp.dest(config.dest))
+
+  bundler = watchify(bundler).on('update', rebundle) if opts.watch
+  rebundle()
+
+
+gulp.task('browserify', bundle.bind(null, { watch: false, debug: true }))
+gulp.task('watchify', bundle.bind(null, { watch: true, debug: true }))
+gulp.task('scripts', ['browserify'])
+
 
 
 #### html --------------------------------
@@ -53,15 +91,16 @@ gulp.task('styles', ->
 
 
 #### browserSync --------------------------------
-gulp.task('serve', ->
+gulp.task('serve', ['html', 'styles', 'watchify'], ->
   browserSync(
     server: [config.src, config.tmp]
   )
 
+  gulp.watch(["#{config.tmp}/**/*.js"], reload)
   gulp.watch(["#{config.src}/**/*.html"], reload)
   gulp.watch(["#{config.src}/**/*.{scss,css}"], ['styles', reload])
 )
 
 
 #### build --------------------------------
-gulp.task('build', ['styles', 'html'])
+gulp.task('build', ['scripts', 'styles', 'html'])
