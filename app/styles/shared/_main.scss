@@ -31,9 +31,25 @@
     @include before-text('###');
   }
 
+  h4 {
+    @include before-text('####');
+  }
+
   li {
     @include before-text('*');
     list-style: none;
+  }
+
+  .dl-with-bullet {
+    > dt {
+      @include before-text('*');
+      font-weight: bold;
+    }
+
+    > dd {
+      @include before-text('-');
+      text-indent: 1em;
+    }
   }
 
   .list-inline {
