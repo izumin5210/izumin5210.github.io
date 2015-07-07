@@ -132,7 +132,7 @@ gulp.task("serve", ["build", "watchify"], () => {
   });
 
   gulp.watch([OUTPUT_SCRIPT], reload);
-  gulp.watch([path.join(TEMPLATES_DIR, "**/*.html")], ['build:template']);
+  gulp.watch([path.join(TEMPLATES_DIR, "**/*.html")], ['build:templates']);
   gulp.watch([path.join(SRC_DIR, "**/*.html"), `!${TEMPLATES_DIR}`], reload);
   gulp.watch([path.join(STYLES_DIR, "**/*.{scss,css}")], ["build:styles", reload]);
 });
