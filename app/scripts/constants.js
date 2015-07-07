@@ -9,3 +9,6 @@ export const menuItems = [
   { name: "research", href: "#/research" },
   { name: "work", href: "#/work" }
 ];
+
+export const templateFileExt = "html";
+export const rootTemplateName = "home";

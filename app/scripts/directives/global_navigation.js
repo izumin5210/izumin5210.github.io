@@ -1,5 +1,6 @@
+import _ from "lodash";
 import angular from "angular";
-import {appName, prefix, menuItems} from "../constants";
+import {appName, prefix, menuItems, rootTemplateName} from "../constants";
 
 let app = angular.module(appName);
 
@@ -10,7 +11,11 @@ class GlobalNavigationController {
   }
 
   isActive(item) {
-    return item.name === this.$routeParams.page;
+    if (_.has(this.$routeParams, "page")) {
+      return item.name === this.$routeParams.page;
+    } else {
+      return item.name === rootTemplateName;
+    }
   }
 }
 

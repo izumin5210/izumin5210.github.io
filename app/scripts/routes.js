@@ -1,12 +1,15 @@
 import angular from "angular";
-import {appName} from "./constants";
+import {appName, templateFileExt, rootTemplateName} from "./constants";
 
 const app = angular.module(appName);
 
 app.config(($routeProvider, $locationProvider) => {
   $locationProvider.html5Mode(false)
   $routeProvider
+    .when("/", {
+      templateUrl: `${rootTemplateName}.${templateFileExt}`
+    })
     .when("/:page", {
-      templateUrl: (params) => `${params.page}.html`
+      templateUrl: (params) => `${params.page}.${templateFileExt}`
     });
 });
