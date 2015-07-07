@@ -7,6 +7,11 @@
     "email": "masayuki@izumin.info",
     "url": "https://github.com/izumin5210"
   },
+  "dependencies": {
+    "angular": "^1.4.1",
+    "angular-route": "^1.4.1",
+    "lodash": "^3.10.0"
+  },
   "devDependencies": {
     "babel": "^5.6.14",
     "babelify": "^6.1.2",
@@ -39,9 +44,5 @@
     "build": "gulp build",
     "serve": "gulp serve",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "angular": "^1.4.1",
-    "angular-route": "^1.4.1"
   }
 }
