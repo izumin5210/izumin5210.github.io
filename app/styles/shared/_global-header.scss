@@ -40,14 +40,14 @@
 
     > ul {
       @include list-unstyled;
-      display: table;
-      table-layout: fixed;
-      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
       font-size: $font-size-large;
 
       > li {
-        display: table-cell;
         height: $nav-height;
+        flex-grow: 1;
 
         > a {
           display: block;
