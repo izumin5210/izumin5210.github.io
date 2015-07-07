@@ -6,7 +6,7 @@ const app = angular.module(appName);
 app.config(($routeProvider, $locationProvider) => {
   $locationProvider.html5Mode(false)
   $routeProvider
-    .when("/profile", {
-      templateUrl: "profile.html"
-    })
-})
+    .when("/:page", {
+      templateUrl: (params) => `${params.page}.html`
+    });
+});
