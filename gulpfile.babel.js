@@ -159,7 +159,7 @@ gulp.task("clean", () => del(CLEAN_TARGET_DIRS, {dot: true}))
 
 
 // browserSync --------------------------------
-gulp.task("serve", ["build", "watchify"], () => {
+gulp.task("serve", ["watchify"], () => {
   browserSync({
     server: [SRC_DIR, TEMP_DIR]
   });
@@ -172,9 +172,8 @@ gulp.task("serve", ["build", "watchify"], () => {
 
 
 // build --------------------------------
-gulp.task("build", (callback) => {
+gulp.task("build", ["clean"], (callback) => {
   runSequence(
-    "clean",
     "build:templates",
     ["build:scripts", "build:styles", "build:html", "build:copy", "build:images"],
     callback
