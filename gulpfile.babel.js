@@ -8,6 +8,7 @@ import source       from "vinyl-source-stream";
 import sass         from "gulp-ruby-sass";
 import browserSync  from "browser-sync";
 import path         from "path";
+import del          from "del";
 import runSequence  from "run-sequence";
 
 import {appName}    from "./app/scripts/constants";
@@ -126,6 +127,16 @@ gulp.task("build:styles", () => {
 });
 
 
+// misc --------------------------------
+const CLEAN_TARGET_DIRS = [
+  TEMP_DIR,
+  DEST_DIR,
+  `!${path.join(DEST_DIR, ".git")}`
+];
+
+gulp.task("clean", () => del(CLEAN_TARGET_DIRS, {dot: true}))
+
+
 // browserSync --------------------------------
 gulp.task("serve", ["build", "watchify"], () => {
   browserSync({
@@ -142,6 +153,7 @@ gulp.task("serve", ["build", "watchify"], () => {
 // build --------------------------------
 gulp.task("build", (callback) => {
   runSequence(
+    "clean",
     "build:templates",
     ["build:scripts", "build:styles", "build:html"],
     callback
