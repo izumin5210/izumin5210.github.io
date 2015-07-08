@@ -54,7 +54,7 @@ let bundle = (opts) => {
   let bundler = getBundler(opts);
 
   let rebundle = () => {
-    bundler.bundle()
+    return bundler.bundle()
       .pipe(source(OUTPUT_SCRIPT))
       .pipe(gulp.dest(TEMP_DIR))
       .pipe($.streamify($.uglify()))
@@ -65,7 +65,8 @@ let bundle = (opts) => {
   if (opts.watch) {
     bundler = watchify(bundler).on("update", rebundle);
   }
-  rebundle();
+
+  return rebundle();
 }
 
 gulp.task("browserify", bundle.bind(null, { watch: false, debug: true }));
@@ -80,7 +81,7 @@ const TEMPLATES_OPTIONS = {
 };
 
 gulp.task("build:templates", () => {
-  gulp.src(path.join(TEMPLATES_DIR, "**/*.html"))
+  return gulp.src(path.join(TEMPLATES_DIR, "**/*.html"))
     .pipe($.angularTemplatecache(TEMPLATES_OPTIONS))
     .pipe($.size({title: "templates.js"}))
     .pipe(gulp.dest(TEMP_DIR));
@@ -89,7 +90,7 @@ gulp.task("build:templates", () => {
 
 // html --------------------------------
 gulp.task("build:html", () => {
-  gulp.src([path.join(SRC_DIR, "**/*.html"), `!${TEMPLATES_DIR}`])
+  return gulp.src([path.join(SRC_DIR, "**/*.html"), `!${TEMPLATES_DIR}`])
     .pipe($.if("*.html", $.minifyHtml()))
     .pipe(gulp.dest(DEST_DIR))
     .pipe($.size({title: "html"}));
@@ -115,7 +116,7 @@ const AUTOPREFIXER_BROWSERS = [
 ];
 
 gulp.task("build:styles", () => {
-  sass(STYLE_ENTRIES, SASS_OPTIONS)
+  return sass(STYLE_ENTRIES, SASS_OPTIONS)
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest(TEMP_DIR))
     .pipe($.if("*.css", $.minifyCss()))
