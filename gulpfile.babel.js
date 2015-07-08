@@ -128,6 +128,18 @@ gulp.task("build:styles", () => {
 
 
 // misc --------------------------------
+const COPY_TARGET_FILES = [
+  path.join(SRC_DIR, "*"),
+  `!${path.join(SRC_DIR, "*.html")}`
+];
+
+gulp.task("build:copy", () => {
+  return gulp.src(COPY_TARGET_FILES, {dot: true, nodir: true})
+    .pipe(gulp.dest(DEST_DIR))
+    .pipe($.size({title: "copy"}));
+});
+
+
 const CLEAN_TARGET_DIRS = [
   TEMP_DIR,
   DEST_DIR,
