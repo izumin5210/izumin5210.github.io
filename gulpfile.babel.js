@@ -167,7 +167,7 @@ gulp.task("build", (callback) => {
   runSequence(
     "clean",
     "build:templates",
-    ["build:scripts", "build:styles", "build:html"],
+    ["build:scripts", "build:styles", "build:html", "build:copy"],
     callback
   );
 });
