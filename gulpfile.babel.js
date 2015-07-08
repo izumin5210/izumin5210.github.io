@@ -171,3 +171,12 @@ gulp.task("build", (callback) => {
     callback
   );
 });
+
+const DEPLOY_OPTIONS = {
+  branch: "master"
+};
+
+gulp.task("deploy", ["build"], () => {
+  return gulp.src(path.join(DEST_DIR, "**/*"))
+    .pipe($.ghPages(DEPLOY_OPTIONS));
+});
