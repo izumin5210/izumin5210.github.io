@@ -26,6 +26,7 @@ const DEST_DIR      = path.join(__dirname, "./dist");
 const SCRIPTS_DIR   = path.join(SRC_DIR, "scripts");
 const TEMPLATES_DIR = path.join(SRC_DIR, "templates");
 const STYLES_DIR    = path.join(SRC_DIR, "styles");
+const IMAGES_DIR    = path.join(SRC_DIR, "images");
 
 const SCRIPT_ENTRIES = [
   path.join(SCRIPTS_DIR, "app.js"),
@@ -128,6 +129,14 @@ gulp.task("build:styles", () => {
 
 
 // misc --------------------------------
+gulp.task("build:images", () => {
+  return gulp.src(path.join(IMAGES_DIR, "**/*"))
+    .pipe(gulp.dest(path.join(DEST_DIR, "images")))
+    .pipe($.size({title: "images"}));
+});
+
+
+// misc --------------------------------
 const COPY_TARGET_FILES = [
   path.join(SRC_DIR, "*"),
   `!${path.join(SRC_DIR, "*.html")}`
@@ -167,7 +176,7 @@ gulp.task("build", (callback) => {
   runSequence(
     "clean",
     "build:templates",
-    ["build:scripts", "build:styles", "build:html", "build:copy"],
+    ["build:scripts", "build:styles", "build:html", "build:copy", "build:images"],
     callback
   );
 });
