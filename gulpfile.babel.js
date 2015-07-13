@@ -201,3 +201,11 @@ gulp.task("deploy", ["build"], () => {
   return gulp.src(path.join(DEST_DIR, "**/*"))
     .pipe($.ghPages(DEPLOY_OPTIONS));
 });
+
+
+// test --------------------------------
+gulp.task("test", (callback) => {
+  runSequence(
+    "lint:styles"
+  )
+});

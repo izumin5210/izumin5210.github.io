@@ -47,6 +47,6 @@
     "build": "gulp build",
     "deploy": "gulp deploy",
     "serve": "gulp serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   }
 }
