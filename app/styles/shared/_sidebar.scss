@@ -21,4 +21,9 @@
   @include media($default-context) {
     @include span-columns(3);
   }
+
+  @include media($mobile-context) {
+    background-color: $gray-lighter;
+    padding: 24px;
+  }
 }

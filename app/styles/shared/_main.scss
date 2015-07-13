@@ -70,4 +70,8 @@ main {
   @include media($default-context) {
     @include span-columns(9);
   }
+
+  @include media($mobile-context) {
+    padding: 0 24px;
+  }
 }
