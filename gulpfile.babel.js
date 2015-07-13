@@ -100,6 +100,10 @@ gulp.task("build:html", () => {
 
 
 // styles --------------------------------
+const SCSS_LINT_OPTIONS = {
+  bundleExec: true
+};
+
 const SASS_OPTIONS = {
   bundleExec: true,
   sourcemap: true,
@@ -120,7 +124,13 @@ const AUTOPREFIXER_BROWSERS = [
   "bb >= 10"
 ];
 
-gulp.task("build:styles", () => {
+gulp.task("lint:styles", () => {
+  return gulp.src(path.join(STYLES_DIR, "**/*.scss"))
+    .pipe($.scssLint(SCSS_LINT_OPTIONS))
+    .pipe($.scssLint.failReporter());
+});
+
+gulp.task("build:styles", ["lint:styles"], () => {
   return sass(STYLE_ENTRIES, SASS_OPTIONS)
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest(TEMP_DIR))
