@@ -2,8 +2,14 @@ language: node_js
 node_js:
 - "0.12"
 - "io.js"
+sudo: false
 cache:
   directories:
-  -  node_modules
+  - node_modules
+  - vendor/bundle
+before_install:
+- rvm use 2.2.2
+- gem install bundler
+- bundle install --path vendor/bundle
 before_script:
-  - npm test
+- npm test
