@@ -11,7 +11,8 @@ let routes = ($routeProvider, $locationProvider) => {
   })
   .when("/:page", {
     templateUrl: (params) => `${params.page}.${templateFileExt}`
-  });
+  })
+  .otherwise("/");
 };
 
 
