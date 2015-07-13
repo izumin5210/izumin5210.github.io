@@ -125,13 +125,20 @@ const AUTOPREFIXER_BROWSERS = [
   "bb >= 10"
 ];
 
-gulp.task("lint:styles", () => {
+gulp.task("lint:scss", () => {
   return gulp.src(path.join(STYLES_DIR, "**/*.scss"))
     .pipe($.scssLint(SCSS_LINT_OPTIONS))
     .pipe($.scssLint.failReporter());
 });
 
-gulp.task("build:styles", ["lint:styles"], () => {
+gulp.task("lint:css", () => {
+  return gulp.src(path.join(DEST_DIR, "**/*.scss"))
+    .pipe($.csslint())
+    .pipe($.csslint.reporter())
+    .pipe($.csslint.failReporter());
+});
+
+gulp.task("build:styles", ["lint:scss"], () => {
   return sass(STYLE_ENTRIES, SASS_OPTIONS)
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe(gulp.dest(TEMP_DIR))
@@ -207,6 +214,7 @@ gulp.task("deploy", ["build"], () => {
 // test --------------------------------
 gulp.task("test", (callback) => {
   runSequence(
-    "lint:styles"
+    "build:styles",
+    "lint:css"
   )
 });
