@@ -101,7 +101,8 @@ gulp.task("build:html", () => {
 
 // styles --------------------------------
 const SCSS_LINT_OPTIONS = {
-  bundleExec: true
+  bundleExec: true,
+  config: ".scsslint.yml"
 };
 
 const SASS_OPTIONS = {
