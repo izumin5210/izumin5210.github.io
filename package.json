@@ -7,6 +7,7 @@
     "email": "masayuki@izumin.info",
     "url": "https://github.com/izumin5210"
   },
+  "bugs": "https://github.com/izumin5210/izumin5210.github.io/issues",
   "dependencies": {
     "angular": "^1.4.1",
     "angular-route": "^1.4.1",
@@ -40,9 +41,15 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.3"
   },
+  "homepage": "https://github.com/izumin5210/izumin.github.io",
   "license": {
     "type": "MIT",
     "url": "http://izumin.mit-license.org/2015"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/izumin5210/izumin5210.github.io.git"
   },
   "scripts": {
     "build": "gulp build",
