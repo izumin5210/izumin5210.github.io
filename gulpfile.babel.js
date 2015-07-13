@@ -92,7 +92,7 @@ gulp.task("build:templates", () => {
 
 // html --------------------------------
 gulp.task("build:html", () => {
-  return gulp.src([path.join(SRC_DIR, "**/*.html"), `!${TEMPLATES_DIR}`])
+  return gulp.src([path.join(SRC_DIR, "**/*.html"), `!${path.join(TEMPLATES_DIR, "**/*.html")}`])
     .pipe($.if("*.html", $.minifyHtml()))
     .pipe(gulp.dest(DEST_DIR))
     .pipe($.size({title: "html"}));
@@ -172,7 +172,7 @@ gulp.task("build:copy", () => {
 
 const CLEAN_TARGET_DIRS = [
   TEMP_DIR,
-  DEST_DIR,
+  path.join(DEST_DIR, "*"),
   `!${path.join(DEST_DIR, ".git")}`
 ];
 
