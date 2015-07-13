@@ -13,9 +13,9 @@
 
   h1 {
     @include before-text('#');
-    font-size: $font-size-larger;
-    padding-bottom: 6px;
     border-bottom: 3px solid $gray-lighter;
+    padding-bottom: 6px;
+    font-size: $font-size-larger;
   }
 
   h2 {
@@ -58,7 +58,7 @@
 
   .dl-horizontal {
     @include dl-horizontal(80px);
-    & > dt {
+    > dt {
       font-weight: bold;
     }
   }

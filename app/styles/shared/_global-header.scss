@@ -1,22 +1,26 @@
 @mixin global-header(
-  $icon-size: 96px,
-  $nav-height: 32px
+  $header-bg,
+  $text-color,
+  $icon-bg,
+  $icon-size,
+  $nav-height
 ) {
   padding-top: 32px;
+
   margin-bottom: 48px;
-  background-color: $brand-primary;
-  color: #fff;
+  background-color: $heaer-bg;
+  color: $text-color;
   text-align: center;
   box-shadow: $box-shadow-base;
 
   .icon-container {
     @include size($icon-size);
     margin: 0 auto;
-    padding: 8px;
-    background-color: #fff;
     border-radius: $icon-size / 2;
+    background-color: $icon-bg;
+    padding: 8px;
 
-    & > img {
+    > img {
       display: block;
       max-width: 100%;
       height: auto;
@@ -27,53 +31,74 @@
     margin: 16px;
 
     h1 > a {
+      border-bottom: 0;
+      color: $text-color;
       font-size: $font-size-large;
-      color: #fff;
-      border-bottom: none;
-      &:hover { border-bottom: none; }
+      &:hover { border-bottom: 0; }
     }
   }
+}
 
-  nav {
-    max-width: $content-width;
-    margin: 32px auto 0;
+@mixin global-navigation(
+  $border-bottom-color,
+  $link-color,
+  $link-color-active
+) {
+  @keyframes nav-border-bottom {
+    0% { border-bottom-color: rgba($border-bottom-color, 0); }
+    100% { border-bottom-color: rgba($border-bottom-color, 1); }
+  }
 
-    > ul {
-      @include list-unstyled;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      font-size: $font-size-large;
+  margin: 32px auto 0;
+  max-width: $content-width;
 
-      > li {
-        height: $nav-height;
-        flex-grow: 1;
+  > ul {
+    @include list-unstyled;
+    display: flex;
+    font-size: $font-size-large;
 
-        > a {
-          display: block;
-          color: rgba(#fff, .5);
-          height: $nav-height;
-          border-bottom: none;
-        }
+    flex-direction: row;
+    justify-content: space-around;
+  }
 
-        &.active {
-          & > a { color: #fff; }
-        }
+  > ul > li {
+    height: $nav-height;
 
-        &:hover > a,
-        &:focus > a {
-          @keyframes nav-border-bottom {
-            0% { border-bottom-color: rgba(#fff, 0); }
-            100% { border-bottom-color: rgba(#fff, 1); }
-          }
-          animation: nav-border-bottom .3s ease-in;
-          border-bottom: 4px solid #fff;
-        }
-      }
+    flex-grow: 1;
+
+    > a {
+      display: block;
+      border-bottom: 0;
+      height: $nav-height;
+      color: $link-color;
+    }
+
+    &.active {
+      > a { color: $link-color-active; }
+    }
+
+    &:hover > a,
+    &:focus > a {
+      animation: nav-border-bottom .3s ease-in;
+      border-bottom: 4px solid $border-bottom-color;
     }
   }
 }
 
 .global-header {
-  @include global-header;
+  @include global-header(
+    $heaer-bg,
+    $header-text-color,
+    $header-icon-bg,
+    96px,
+    32px
+  );
+
+  nav {
+    @include global-navigation(
+      $nav-indicator-color,
+      $nav-link-color,
+      $nav-link-active-color
+    );
+  }
 }
