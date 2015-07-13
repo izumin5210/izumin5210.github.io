@@ -1,10 +1,6 @@
-@mixin main-container(
+@mixin main(
   $main-width: $content-width
 ) {
-  max-width: $main-width;
-  padding: 16px;
-  margin: 16px auto;
-
   section {
     margin: 16px 0 32px;
   }
@@ -69,5 +65,9 @@
 }
 
 main {
-  @include main-container;
+  @include main;
+
+  @include media($default-context) {
+    @include span-columns(9);
+  }
 }

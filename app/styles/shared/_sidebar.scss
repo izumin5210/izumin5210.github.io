@@ -17,4 +17,8 @@
 
 .sidebar {
   @include sidebar;
+
+  @include media($default-context) {
+    @include span-columns(3);
+  }
 }
