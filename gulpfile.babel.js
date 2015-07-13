@@ -102,7 +102,10 @@ gulp.task("build:html", () => {
 // styles --------------------------------
 const SASS_OPTIONS = {
   bundleExec: true,
-  sourcemap: true
+  sourcemap: true,
+  trace: true,
+  loadPath: STYLES_DIR,
+  require: "sass-globbing"
 };
 
 const AUTOPREFIXER_BROWSERS = [
