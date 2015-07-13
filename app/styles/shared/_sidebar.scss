@@ -1,0 +1,20 @@
+@mixin sidebar() {
+  section {
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    @include before-text('#');
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  li {
+    @include before-text('*');
+    list-style: none;
+  }
+}
+
+.sidebar {
+  @include sidebar;
+}
