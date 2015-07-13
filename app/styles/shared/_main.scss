@@ -3,6 +3,12 @@
 ) {
   section {
     margin: 16px 0 32px;
+
+    @include media($default-context) {
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
   }
 
   h1,
