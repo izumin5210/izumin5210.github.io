@@ -45,7 +45,6 @@
   .dl-with-bullet {
     > dt {
       @include before-text('*');
-      font-weight: bold;
     }
 
     > dd {
@@ -54,19 +53,12 @@
     }
   }
 
-  .list-inline {
-    @include list-inline;
-    > li {
-      &:before { content: none; }
-      &:after { content: none; }
-    }
+  .skill-list {
+    @include list-pills;
   }
 
   .dl-horizontal {
     @include dl-horizontal(80px);
-    > dt {
-      font-weight: bold;
-    }
   }
 }
 
