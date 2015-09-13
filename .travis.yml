@@ -15,3 +15,8 @@ before_install:
 before_script:
 - $(npm bin)/bower install
 - npm test
+deploy:
+  provider: script
+  script: npm run deploy
+  on:
+    branch: develop
