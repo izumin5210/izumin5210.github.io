@@ -52,6 +52,7 @@
     "url": "https://github.com/izumin5210/izumin5210.github.io.git"
   },
   "scripts": {
+    "start": "npm install && bower install && gulp build",
     "build": "gulp build",
     "deploy": "gulp deploy",
     "serve": "gulp serve",
