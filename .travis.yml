@@ -17,6 +17,6 @@ before_script:
 - npm test
 deploy:
   provider: script
-  script: npm run deploy
+  script: ./scripts/deploy.sh
   on:
     branch: develop
