@@ -15,7 +15,8 @@ git config --global user.email $GIT_EMAIL
 git config --global credential.helper store
 echo "https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com" > ~/.git-credentials
 
-./scripts/install_hugo.sh
+gem install bundler
+bundle install
 
 npm start && npm run deploy
 
