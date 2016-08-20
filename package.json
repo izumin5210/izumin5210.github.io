@@ -1,0 +1,27 @@
+{
+  "name": "izumin.info",
+  "description": "Portfolio of Masayuki IZUMI (@izumin5210)",
+  "version": "1.0.0",
+  "author": {
+    "name": "Masayuki IZUMI",
+    "email": "masayuki@izumin.info",
+    "url": "https://github.com/izumin5210"
+  },
+  "bugs": {
+    "url": "https://github.com/izumin5210/izumin5210.github.io/issues"
+  },
+  "homepage": "https://github.com/izumin5210/izumin5210.github.io#readme",
+  "license": {
+    "type": "MIT",
+    "url": "http://izumin.mit-license.org/2015"
+  },
+  "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/izumin5210/izumin5210.github.io.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
