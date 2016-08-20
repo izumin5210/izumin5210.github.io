@@ -1,4 +1,0 @@
-linters:
-  PropertySortOrder:
-    order: concentric
-    separate_groups: true
