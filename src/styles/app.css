@@ -1,0 +1,11 @@
+@import "./constants";
+
+:root {
+  background: linear-gradient(
+    160deg,
+    var(--color-primary-blue) 20%,
+    var(--color-primary-pink) 100%
+  );
+  min-width: 100%;
+  min-height: 100%;
+}
