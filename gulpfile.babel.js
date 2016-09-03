@@ -1,8 +1,8 @@
 import gulp             from "gulp";
 import gulpLoadPlugins  from "gulp-load-plugins";
 
-import browserify		from "browserify";
-import watchify			from "watchify";
+import browserify   from "browserify";
+import watchify     from "watchify";
 import source       from "vinyl-source-stream";
 import buffer       from "vinyl-buffer";
 import del          from "del";
@@ -46,7 +46,7 @@ const getBundler = opts => {
   return browserify(browserifyOpts)
     .transform({ continuous: true }, eslintify)
     .transform(envify)
-	  .transform(babelify)
+    .transform(babelify)
     .plugin(licensify)
     .transform({ global: true }, uglifyify);
 };
