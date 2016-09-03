@@ -18,7 +18,8 @@
     "react": "^15.3.1",
     "react-art": "^0.15.1",
     "react-dispatcher-decorator": "^0.1.5",
-    "react-dom": "^15.3.1"
+    "react-dom": "^15.3.1",
+    "sanitize.css": "^4.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

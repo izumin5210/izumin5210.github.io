@@ -1,4 +1,5 @@
 @import "./constants";
+@import "sanitize.css";
 
 :root {
   background:
