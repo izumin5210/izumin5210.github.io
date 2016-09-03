@@ -22,6 +22,7 @@ import postcssCustomProperties  from "postcss-custom-properties";
 import autoprefixer     from "autoprefixer";
 import postcssCsso      from "postcss-csso";
 import postcssReporter  from "postcss-reporter";
+import stylelint        from "stylelint";
 
 const $       = gulpLoadPlugins();
 const reload  = browserSync.reload;
@@ -74,13 +75,15 @@ gulp.task("build:scripts", ["browserify"]);
 
 gulp.task("build:styles", () => {
   const processors = [
-    postcssReporter,
-    postcssImport,
+    postcssImport({
+      plugins: [stylelint]
+    }),
     postcssCustomProperties,
     postcssApply,
     postcssFlexbugsFixes,
     autoprefixer,
-    postcssCsso
+    postcssCsso,
+    postcssReporter
   ];
   return gulp.src(path.join(config.src, "styles/app.css"))
     .pipe($.if(debug, $.sourcemaps.init()))

@@ -54,6 +54,10 @@
     "postcss-nesting": "^2.3.1",
     "postcss-reporter": "^1.4.1",
     "run-sequence": "^1.2.2",
+    "stylelint": "^7.2.0",
+    "stylelint-config-standard": "^13.0.0",
+    "stylelint-declaration-use-variable": "^1.6.0",
+    "stylelint-selector-bem-pattern": "^1.0.0",
     "uglifyify": "^3.0.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
@@ -71,11 +75,14 @@
     "url": "git+https://github.com/izumin5210/izumin5210.github.io.git"
   },
   "scripts": {
+    "lint:styles": "stylelint src/styles/**/*.css",
+    "lint": "npm run lint:styles",
     "build:scripts": "gulp build:scripts",
     "build:styles": "gulp build:styles",
     "build:images": "gulp build:images",
     "build:html": "gulp build:html",
     "build": "gulp build",
-    "start": "gulp serve"
+    "start": "gulp serve",
+    "test": "npm run lint"
   }
 }
