@@ -14,12 +14,11 @@
     "axios": "^0.13.1",
     "babel-polyfill": "^6.13.0",
     "immutable": "^3.8.1",
-    "pixi.js": "^4.0.0",
     "promised-reducer": "^0.1.0",
     "react": "^15.3.1",
+    "react-art": "^0.15.1",
     "react-dispatcher-decorator": "^0.1.5",
-    "react-dom": "^15.3.1",
-    "react-pixi": "^0.8.2"
+    "react-dom": "^15.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

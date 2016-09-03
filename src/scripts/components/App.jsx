@@ -32,7 +32,11 @@ export default class App extends Component {
 
   render() {
     return (
-      <ContributionGraph contributions={this.state.contributions} />
+      <ContributionGraph
+        rows={7}
+        cols={31}
+        contributions={this.state.contributions}
+      />
     );
   }
 }
