@@ -10,6 +10,7 @@ import runSequence  from "run-sequence";
 import browserSync  from "browser-sync";
 import path         from "path";
 
+import eslintify  from "eslintify";
 import envify     from "envify";
 import babelify   from "babelify";
 import licensify  from "licensify";
@@ -43,6 +44,7 @@ const getBundler = opts => {
   };
 
   return browserify(browserifyOpts)
+    .transform({ continuous: true }, eslintify)
     .transform(envify)
 	  .transform(babelify)
     .plugin(licensify)
