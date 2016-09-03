@@ -9,10 +9,18 @@ export default class HexTile extends Component {
   static radius = HexTile.size / 2;
   static vertexAngles = [...Array(6).keys()].map(i => Math.PI * (1 / 3) * (i + 0.5));
 
+  static colors = [
+    0xd8d8eb,
+    0xd7b5d7,
+    0xe192c2,
+    0xff66b2,
+  ];
+
   static propTypes = {
     row: PropTypes.number.isRequired,
     col: PropTypes.number.isRequired,
     count: PropTypes.number.isRequired,
+    maxCount: PropTypes.number.isRequired,
   };
 
   calcCenter() {
@@ -39,9 +47,19 @@ export default class HexTile extends Component {
     return path;
   }
 
+  makeColor() {
+    const { count, maxCount } = this.props;
+    const variations = HexTile.colors.length;
+    const colorIdx = Math.ceil((count / (maxCount + 1)) * HexTile.colors.length);
+    return HexTile.colors[(colorIdx === variations) ? variations - 1 : colorIdx];
+  }
+
   render() {
     return (
-      <Shape d={this.makePath()} fill={0xd8d8eb} />
+      <Shape
+        d={this.makePath()}
+        fill={this.makeColor()}
+      />
     );
   }
 }

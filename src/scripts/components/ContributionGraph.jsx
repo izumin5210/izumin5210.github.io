@@ -30,12 +30,15 @@ export default class ContributionGraph extends Component {
   render() {
     const { rows, cols } = this.props;
     const startIdx = this.props.contributions.size - (cols * rows);
-    const tiles = this.props.contributions.slice(startIdx).map((contribution, i) => (
+    const contributions = this.props.contributions.slice(startIdx);
+    const maxCount = Math.max.apply(null, contributions.map(c => c.count).toArray());
+    const tiles = contributions.map((contribution, i) => (
       <HexTile
         key={`contributed-on-${contribution.date}`}
-        row={i % rows}
-        col={Math.floor(i / rows)}
+        row={i % this.props.rows}
+        col={Math.floor(i / this.props.rows)}
         count={contribution.count}
+        maxCount={maxCount}
       />
     ));
     return (
