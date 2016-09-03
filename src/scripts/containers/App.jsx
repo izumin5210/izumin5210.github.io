@@ -8,7 +8,9 @@ import axios from "axios";
 
 import { Contribution, store } from "../entities";
 
-import ContributionGraph from "./ContributionGraph";
+import {
+  ContributionGraph,
+} from "../components";
 
 const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/20160825T075859508.json";
 
