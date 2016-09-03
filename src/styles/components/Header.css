@@ -1,0 +1,74 @@
+/** @define Header */
+
+:root {
+  --Header-icon-width: 84px;
+  --Header-icon-height: calc(var(--Header-icon-width) / 3 * 1.7321);
+}
+
+.Header {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.Header__profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 128px;
+}
+
+.Header__icon {
+  position: relative;
+  display: inline-block;
+  width: var(--Header-icon-width);
+  height: var(--Header-icon-height);
+  background-color: var(--color-base);
+  margin: calc(var(--Header-icon-height) / 2) 16px;
+  z-index: -1;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: calc(var(--Header-icon-width) / 2) solid transparent;
+    border-right: calc(var(--Header-icon-width) / 2) solid transparent;
+    z-index: -1;
+  }
+
+  &::before {
+    bottom: 100%;
+    border-bottom: calc(var(--Header-icon-height) / 2) solid var(--color-base);
+  }
+
+  &::after {
+    top: 100%;
+    border-top: calc(var(--Header-icon-height) / 2) solid var(--color-base);
+  }
+
+  @nest & > img {
+    position: relative;
+    display: block;
+    max-width: var(--Header-icon-width);
+    max-height: var(--Header-icon-width);
+    margin: calc((var(--Header-icon-width) - var(--Header-icon-height)) / (-2)) 0;
+    padding: 6px;
+  }
+}
+
+.Header__name {
+  color: var(--color-primary-pink);
+  margin: 0;
+  font-size: 21px;
+  font-weight: normal;
+}
+
+.Header__description {
+  color: var(--color-base);
+  font-size: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

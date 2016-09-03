@@ -10,6 +10,7 @@ import { Contribution, store } from "../entities";
 
 import {
   ContributionGraph,
+  Header,
 } from "../components";
 
 const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/20160825T075859508.json";
@@ -34,11 +35,22 @@ export default class App extends Component {
 
   render() {
     return (
-      <ContributionGraph
-        rows={7}
-        cols={31}
-        contributions={this.state.contributions}
-      />
+      <div className="container-app">
+        <Header
+          name="izumin5210"
+          icon="/images/izumin.png"
+          description={[
+            "Software Engineer",
+            "Research at Rekimoto Lab., The University of Tokyo",
+          ]}
+        >
+          <ContributionGraph
+            rows={7}
+            cols={31}
+            contributions={this.state.contributions}
+          />
+        </Header>
+      </div>
     );
   }
 }
