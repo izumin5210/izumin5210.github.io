@@ -18,12 +18,14 @@ import uglifyify  from "uglifyify";
 
 import postcssApply     from "postcss-apply";
 import postcssImport    from "postcss-import";
+import postcssNesting   from "postcss-nesting";
 import postcssFlexbugsFixes     from "postcss-flexbugs-fixes";
 import postcssCustomProperties  from "postcss-custom-properties";
 import autoprefixer     from "autoprefixer";
 import postcssCsso      from "postcss-csso";
 import postcssReporter  from "postcss-reporter";
 import stylelint        from "stylelint";
+
 
 const $       = gulpLoadPlugins();
 const reload  = browserSync.reload;
@@ -82,6 +84,7 @@ gulp.task("build:styles", () => {
     }),
     postcssCustomProperties,
     postcssApply,
+    postcssNesting,
     postcssFlexbugsFixes,
     autoprefixer,
     postcssCsso,
@@ -89,6 +92,7 @@ gulp.task("build:styles", () => {
   ];
   return gulp.src(path.join(config.src, "styles/app.css"))
     .pipe($.if(debug, $.sourcemaps.init()))
+    .pipe($.plumber())
     .pipe($.postcss(processors))
     .pipe($.if(debug, $.sourcemaps.write(".")))
     .pipe(gulp.dest(config.dest))
@@ -133,8 +137,8 @@ gulp.task("serve", ["build", "watchify"], () => {
   });
 
   gulp.watch([path.join(config.src, "/**/*.html")], ["build:html", reload]);
-  gulp.watch([path.join(config.src, "/styles/*.css")], ["build:styles", reload]);
-  gulp.watch([path.join(config.src, "/images/*.css")], ["build:iamges", reload]);
+  gulp.watch([path.join(config.src, "/styles/**/*.css")], ["build:styles", reload]);
+  gulp.watch([path.join(config.src, "/images/**/*")], ["build:images", reload]);
 });
 
 gulp.task('clean', () => del([config.dest, `!${path.join(config.dest, ".git")}`], { dot: true }));
