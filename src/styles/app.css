@@ -1,6 +1,8 @@
 @import "./constants";
 @import "sanitize.css";
 
+@import "./components/Header";
+
 :root {
   background:
     linear-gradient(

@@ -39,7 +39,11 @@ export default class ContributionGraph extends Component {
       />
     ));
     return (
-      <Surface width={this.width} height={this.height} >
+      <Surface
+        width={this.width}
+        height={this.height}
+        className="ContributionGraph"
+      >
         { tiles }
       </Surface>
     );
