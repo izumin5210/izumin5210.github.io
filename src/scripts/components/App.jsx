@@ -1,24 +1,26 @@
-import "babel-polyfill";
-import React, {Component} from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from "react";
 
-import {subscriber}     from "react-dispatcher-decorator";
+import { subscriber }   from "react-dispatcher-decorator";
 import PromisedReducer  from "promised-reducer";
 
-import {Seq, Map} from "immutable";
+import { Seq, Map } from "immutable";
 import axios from "axios";
 
-import {Contribution, Contributions, store} from "../entities";
+import { Contribution, store } from "../entities";
 
-import ContributionGraph from "./ContributionGraph.jsx";
+import ContributionGraph from "./ContributionGraph";
 
+const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/20160825T075859508.json";
 
 @subscriber((self, subscribe) => {
   const reducer = new PromisedReducer(self.state);
-  reducer.on(":update", state => self.setState(state.toObject())); 
-  subscribe("contributions:fetch", prop => {
-    reducer.update(state => axios.get("https://s3-ap-northeast-1.amazonaws.com/kusa-store/20160825T075859508.json")
-        .then(res => Map(state).set("contributions", Seq(res.data).map(c => new Contribution(c)).toList()))
+  reducer.on(":update", state => self.setState(state.toObject()));
+  subscribe("contributions:fetch", () => {
+    reducer.update(state => axios.get(contributionsUrl)
+        .then(res => Map(state).set(
+            "contributions",
+            Seq(res.data).map(c => new Contribution(c)).toList()
+        ))
     );
   });
 })

@@ -1,9 +1,9 @@
 import React from "react";
-import {dispatcher} from "react-dispatcher-decorator";
-import {Stage, CustomPIXIComponent} from "react-pixi";
-import {Graphics} from "pixi.js";
+import { dispatcher } from "react-dispatcher-decorator";
+import { Stage, CustomPIXIComponent } from "react-pixi";
+import { Graphics } from "pixi.js";
 
-import {Contribution, Contributions} from "../entities";
+import { Contributions } from "../entities";
 
 const ContributionCell = CustomPIXIComponent({
   customDisplayObject(props) {
@@ -16,7 +16,7 @@ const ContributionCell = CustomPIXIComponent({
     }
     graphics.endFill();
     return graphics;
-  }
+  },
 });
 
 @dispatcher
@@ -25,33 +25,51 @@ export default class ContributionGraph extends React.Component {
     this.context.dispatch("contributions:fetch");
   }
 
-  render() {
-    const cellSize = 24;
-    const cellGutter = 4;
-    const cellMargin = (cellSize + cellGutter) / 2;
-    const r = cellSize / 2;
-    const weekCount = 33;
-    const cells = this.props.contributions.slice(this.props.contributions.size - weekCount * 7).map((contribution, idx) => {
-      const i = idx % 7;
-      const j = Math.floor(idx / 7);
+  cellSize = 24;
+  cellGutter = 4;
+  cellMargin = (this.cellSize + this.cellGutter) / 2;
+  cellRadius = this.cellSize / 2;
+  weekCount = 33;
+  daysPerWeek = 7;
+  corners = 6;
+  vertexAngles = [...Array(this.corners).keys()].map(i => (2 / this.corners) * (i + 0.5));
+  stageWidth = ((this.cellSize + this.cellGutter) * this.weekCount)
+    + (this.cellMargin - this.cellGutter);
+  stageHeight = this.cellSize * this.daysPerWeek;
 
-      const cx = cellSize * j + (j > 0 ? (cellGutter * j) : 0) + (i % 2) * cellMargin + r;
-      const cy = cellSize * i + r;
-      const vertices = [1 / 6, 1/ 2, 5 / 6, 7 / 6, 3 / 2, 11 / 6].map(t => [
-          cx + r * Math.cos(Math.PI * t), cy + r * Math.sin(Math.PI * t)
-      ]);
+  calcCellCenter(row, col) {
+    const indent = (row % 2) * this.cellMargin;
+    return {
+      x: ((this.cellSize + this.cellGutter) * col) + indent + this.cellRadius,
+      y: (this.cellSize * row) + this.cellRadius,
+    };
+  }
+
+  generateVertices(row, col) {
+    const pos = this.calcCellCenter(row, col);
+    return this.vertexAngles.map(t => [
+      pos.x + (this.cellRadius * Math.cos(Math.PI * t)),
+      pos.y + (this.cellRadius * Math.sin(Math.PI * t)),
+    ]);
+  }
+
+  render() {
+    const cellStartedAt = this.props.contributions.size - (this.weekCount * 7);
+    const cells = this.props.contributions.slice(cellStartedAt).map((contribution, idx) => {
+      const i = idx % this.daysPerWeek;
+      const j = Math.floor(idx / this.daysPerWeek);
       return {
-        vertices: vertices,
+        vertices: this.generateVertices(i, j),
         count: contribution.count,
-        date: contribution.date
+        date: contribution.date,
       };
     });
     return (
       <Stage
-        width={(cellSize + cellGutter) * Math.ceil(weekCount) + cellMargin - cellGutter}
-        height={cellSize * 7}
-        antialias={true}
-        transparent={true}
+        width={this.stageWidth}
+        height={this.stageHeight}
+        antialias
+        transparent
         backgroundcolor={0x333333}
       >
         { cells.map(cell => <ContributionCell key={`contributed-on-${cell.date}`} cell={cell} />) }
@@ -61,5 +79,5 @@ export default class ContributionGraph extends React.Component {
 }
 
 ContributionGraph.propTypes = {
-  contributions: React.PropTypes.instanceOf(Contributions).isRequired
+  contributions: React.PropTypes.instanceOf(Contributions).isRequired,
 };
