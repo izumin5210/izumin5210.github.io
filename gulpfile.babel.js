@@ -16,6 +16,7 @@ import babelify   from "babelify";
 import licensify  from "licensify";
 import uglifyify  from "uglifyify";
 
+import postcssCalc      from "postcss-calc";
 import postcssApply     from "postcss-apply";
 import postcssImport    from "postcss-import";
 import postcssNesting   from "postcss-nesting";
@@ -85,6 +86,7 @@ gulp.task("build:styles", () => {
     postcssCustomProperties,
     postcssApply,
     postcssNesting,
+    postcssCalc,
     postcssFlexbugsFixes,
     autoprefixer,
     postcssCsso,
