@@ -1,7 +1,9 @@
 import Header             from "./Header";
+import Section            from "./Section";
 import ContributionGraph  from "./ContributionGraph";
 
 export {
-  ContributionGraph,
   Header,
+  Section,
+  ContributionGraph,
 };

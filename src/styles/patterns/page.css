@@ -1,0 +1,17 @@
+:root {
+  --page: {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+  }
+
+  --page-title: {
+    color: var(--color-text);
+    margin: 0 auto 64px;
+    padding: 0 16px 2px;
+    font-size: 21px;
+    font-weight: normal;
+    border-bottom: 1px solid var(--color-text);
+  }
+}

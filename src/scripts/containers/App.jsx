@@ -9,8 +9,9 @@ import axios from "axios";
 import { Contribution, store } from "../entities";
 
 import {
-  ContributionGraph,
   Header,
+  Section,
+  ContributionGraph,
 } from "../components";
 
 const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/20160825T075859508.json";
@@ -50,6 +51,8 @@ export default class App extends Component {
             contributions={this.state.contributions}
           />
         </Header>
+        <Section name="PrimarySkills" title="Skills">
+        </Section>
       </div>
     );
   }

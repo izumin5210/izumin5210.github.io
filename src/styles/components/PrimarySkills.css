@@ -1,0 +1,9 @@
+/** @define PrimarySkills */
+
+.PrimarySkills {
+  @apply --page;
+}
+
+.PrimarySkills__title {
+  @apply --page-title;
+}

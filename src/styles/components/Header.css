@@ -6,10 +6,7 @@
 }
 
 .Header {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  justify-content: center;
+  @apply --page;
 }
 
 .Header__profile {
@@ -59,14 +56,14 @@
 }
 
 .Header__name {
-  color: var(--color-primary-pink);
+  color: var(--color-accent);
   margin: 0;
   font-size: 21px;
   font-weight: normal;
 }
 
 .Header__description {
-  color: var(--color-base);
+  color: var(--color-text);
   font-size: 16px;
   list-style: none;
   margin: 0;

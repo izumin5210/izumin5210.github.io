@@ -1,8 +1,11 @@
 @import "./constants";
 @import "sanitize.css";
 
+@import "./patterns/page";
+
 @import "./components/Header";
 @import "./components/ContributionGraph";
+@import "./components/PrimarySkills";
 
 :root {
   background:
