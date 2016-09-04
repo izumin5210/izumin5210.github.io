@@ -6,13 +6,20 @@ import PromisedReducer  from "promised-reducer";
 import { Seq, Map } from "immutable";
 import axios from "axios";
 
-import { Contribution, store } from "../entities";
+import {
+  Contribution,
+  PrimarySkill,
+  store,
+} from "../entities";
 
 import {
   Header,
   Section,
   ContributionGraph,
+  PrimarySkillsChart,
 } from "../components";
+
+import initialPrimarySkills from "../data/primary_skills";
 
 const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/20160825T075859508.json";
 
@@ -26,6 +33,12 @@ const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/201
             Seq(res.data).map(c => new Contribution(c)).toList()
         ))
     );
+  });
+  subscribe("PrimarySkills:fetch", () => {
+    reducer.update(state => Map(state).set(
+      "primarySkills",
+      Seq(initialPrimarySkills).map(s => new PrimarySkill(s)).toList()
+    ));
   });
 })
 export default class App extends Component {
@@ -52,6 +65,9 @@ export default class App extends Component {
           />
         </Header>
         <Section name="PrimarySkills" title="Skills">
+          <PrimarySkillsChart
+            skills={this.state.primarySkills}
+          />
         </Section>
       </div>
     );

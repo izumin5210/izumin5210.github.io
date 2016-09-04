@@ -7,3 +7,7 @@
 .PrimarySkills__title {
   @apply --page-title;
 }
+
+.PrimarySkills__chart {
+  margin: 0 auto;
+}

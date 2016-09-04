@@ -43,7 +43,7 @@ const getBundler = opts => {
   const browserifyOpts = {
     entries: [path.join(config.src, "scripts/index.js")],
     debug: opts.debug,
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx", ".json"]
   };
 
   return browserify(browserifyOpts)

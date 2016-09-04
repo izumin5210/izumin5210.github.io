@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Ruby / Rails",
+    "score": 0.90
+  },
+  {
+    "name": "Frontend JS / CSS",
+    "score": 1.00
+  },
+  {
+    "name": "Android",
+    "score": 0.70
+  },
+  {
+    "name": "Python / Jupyter",
+    "score": 0.25
+  },
+  {
+    "name": "Cinder / openFrameworks",
+    "score": 0.50
+  }
+]
