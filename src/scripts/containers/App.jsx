@@ -19,7 +19,7 @@ const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/201
 @subscriber((self, subscribe) => {
   const reducer = new PromisedReducer(self.state);
   reducer.on(":update", state => self.setState(state.toObject()));
-  subscribe("contributions:fetch", () => {
+  subscribe("Contributions:fetch", () => {
     reducer.update(state => axios.get(contributionsUrl)
         .then(res => Map(state).set(
             "contributions",

@@ -24,7 +24,7 @@ export default class ContributionGraph extends Component {
   }
 
   componentDidMount() {
-    this.context.dispatch("contributions:fetch");
+    this.context.dispatch("Contributions:fetch");
   }
 
   render() {
