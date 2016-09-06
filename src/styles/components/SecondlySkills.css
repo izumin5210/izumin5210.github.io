@@ -1,0 +1,10 @@
+/** @define SecondlySkills */
+
+.SecondlySkills {
+  @apply --page;
+}
+
+.SecondlySkills__chart {
+  margin: 0 auto;
+}
+

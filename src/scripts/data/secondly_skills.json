@@ -1,0 +1,71 @@
+[
+  {
+    "name": "C++"
+  },
+  {
+    "name": "Java"
+  },
+  {
+    "name": "Kotlin"
+  },
+  {
+    "name": "RxJava"
+  },
+  {
+    "name": "Node.js"
+  },
+  {
+    "name": "Modern\nJS Frameworks"
+  },
+  {
+    "name": "React"
+  },
+  {
+    "name": "Angular"
+  },
+  {
+    "name": "TypeScript"
+  },
+  {
+    "name": "Frontend\nArchitecture"
+  },
+  {
+    "name": "Web API\nDesign"
+  },
+  {
+    "name": "JSON Schema"
+  },
+  {
+    "name": "Swagger"
+  },
+  {
+    "name": "TDD / BDD"
+  },
+  {
+    "name": "RSpec"
+  },
+  {
+    "name": "Golang"
+  },
+  {
+    "name": "Docker"
+  },
+  {
+    "name": "Kinect v2"
+  },
+  {
+    "name": "PointCloud\nLibrary"
+  },
+  {
+    "name": "OpenCV"
+  },
+  {
+    "name": "OpenGL"
+  },
+  {
+    "name": "Vim"
+  },
+  {
+    "name": "AWS"
+  }
+]

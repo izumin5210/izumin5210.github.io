@@ -6,6 +6,7 @@
 @import "./components/Header";
 @import "./components/ContributionGraph";
 @import "./components/PrimarySkills";
+@import "./components/SecondlySkills";
 
 :root {
   background:

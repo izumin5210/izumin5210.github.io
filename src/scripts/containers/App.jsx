@@ -9,6 +9,7 @@ import axios from "axios";
 import {
   Contribution,
   PrimarySkill,
+  SecondlySkill,
   store,
 } from "../entities";
 
@@ -17,9 +18,11 @@ import {
   Section,
   ContributionGraph,
   PrimarySkillsChart,
+  SecondlySkillsChart,
 } from "../components";
 
-import initialPrimarySkills from "../data/primary_skills";
+import initialPrimarySkills   from "../data/primary_skills";
+import initialSecondlySkills  from "../data/secondly_skills";
 
 const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/20160825T075859508.json";
 
@@ -38,6 +41,12 @@ const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/201
     reducer.update(state => Map(state).set(
       "primarySkills",
       Seq(initialPrimarySkills).map(s => new PrimarySkill(s)).toList()
+    ));
+  });
+  subscribe("SecondlySkills:fetch", () => {
+    reducer.update(state => Map(state).set(
+      "secondlySkills",
+      Seq(initialSecondlySkills).map(s => new SecondlySkill(s)).toList()
     ));
   });
 })
@@ -67,6 +76,11 @@ export default class App extends Component {
         <Section name="PrimarySkills" title="Skills">
           <PrimarySkillsChart
             skills={this.state.primarySkills}
+          />
+        </Section>
+        <Section name="SecondlySkills">
+          <SecondlySkillsChart
+            skills={this.state.secondlySkills}
           />
         </Section>
       </div>
