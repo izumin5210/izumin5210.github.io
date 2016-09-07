@@ -14,11 +14,11 @@ export default class SkillBar extends Component {
     fontFamily: PropTypes.string.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.pos = {
+  calcPos() {
+    const { height, gutter, order } = this.props;
+    return {
       x: 0,
-      y: ((props.height + (props.gutter * 2)) * props.order) + props.gutter,
+      y: ((height + (gutter * 2)) * order) + gutter,
     };
   }
 
@@ -38,6 +38,7 @@ export default class SkillBar extends Component {
   }
 
   render() {
+    this.pos = this.calcPos();
     const { width, height, skill, fontSize, fontFamily } = this.props;
     return (
       <Group>

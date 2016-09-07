@@ -12,45 +12,46 @@ export default class PrimarySkillsChart extends Component {
     skills: PropTypes.instanceOf(PrimarySkills).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    // FIXME
-    this.chartParams = {
-      width: 960,
-      height: 54,
-      gutter: 27,
-      fontSize: 20,
-      fontFamily: "Inconsolata",
-    };
+  static chartParams = {
+    width: 960,
+    height: 54,
+    gutter: 27,
+    fontSize: 20,
+    fontFamily: "Inconsolata",
+  };
+
+  componentWillMount() {
+    this.context.dispatch("PrimarySkills:fetch");
   }
 
-  componentDidMount() {
-    this.context.dispatch("PrimarySkills:fetch");
+  calcSurfaceSize() {
+    const { height, gutter } = PrimarySkillsChart.chartParams;
+    return {
+      width: 960,
+      height: (height + (gutter * 2)) * this.props.skills.size,
+    };
   }
 
   makeStartLinePath() {
     const path = new Path();
     path.moveTo(0, 0);
-    path.lineTo(0, this.surfaceHeight);
+    path.lineTo(0, this.surfaceSize.height);
     return path;
   }
 
   render() {
-    const { height, gutter } = this.chartParams;
-    this.surfaceWidth = 960;
-    this.surfaceHeight = (height + (gutter * 2)) * this.props.skills.size;
+    this.surfaceSize = this.calcSurfaceSize();
     const bars = this.props.skills.map((skill, i) => (
       <SkillBar
         key={`PrimarySkill-${i}`}
         order={i}
         skill={skill}
-        {...this.chartParams}
+        {...PrimarySkillsChart.chartParams}
       />
     ));
     return (
       <Surface
-        width={this.surfaceWidth}
-        height={this.surfaceHeight}
+        {...this.surfaceSize}
         className="PrimarySkills__chart"
       >
         <Shape stroke="#d8d8eb" strokeWidth={2} d={this.makeStartLinePath()} />
