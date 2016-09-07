@@ -1,17 +1,8 @@
 import React, { Component } from "react";
+import { subscriber }       from "react-dispatcher-decorator";
 
-import { subscriber }   from "react-dispatcher-decorator";
-import PromisedReducer  from "promised-reducer";
-
-import { Seq, Map } from "immutable";
-import axios from "axios";
-
-import {
-  Contribution,
-  PrimarySkill,
-  SecondlySkill,
-  store,
-} from "../entities";
+import { store }  from "../entities";
+import reducers   from "../reducers";
 
 import {
   Header,
@@ -21,39 +12,11 @@ import {
   SecondlySkillsChart,
 } from "../components";
 
-import initialPrimarySkills   from "../data/primary_skills";
-import initialSecondlySkills  from "../data/secondly_skills";
 
-const contributionsUrl = "https://s3-ap-northeast-1.amazonaws.com/kusa-store/20160825T075859508.json";
-
-@subscriber((self, subscribe) => {
-  const reducer = new PromisedReducer(self.state);
-  reducer.on(":update", state => self.setState(state.toObject()));
-  subscribe("Contributions:fetch", () => {
-    reducer.update(state => axios.get(contributionsUrl)
-        .then(res => Map(state).set(
-            "contributions",
-            Seq(res.data).map(c => new Contribution(c)).toList()
-        ))
-    );
-  });
-  subscribe("PrimarySkills:fetch", () => {
-    reducer.update(state => Map(state).set(
-      "primarySkills",
-      Seq(initialPrimarySkills).map(s => new PrimarySkill(s)).toList()
-    ));
-  });
-  subscribe("SecondlySkills:fetch", () => {
-    reducer.update(state => Map(state).set(
-      "secondlySkills",
-      Seq(initialSecondlySkills).map(s => new SecondlySkill(s)).toList()
-    ));
-  });
-})
+@subscriber(reducers)
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = store;
+  componentWillMount() {
+    this.setState(store);
   }
 
   render() {
