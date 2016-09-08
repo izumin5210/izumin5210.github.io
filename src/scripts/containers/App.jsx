@@ -10,6 +10,7 @@ import {
   ContributionGraph,
   PrimarySkillsChart,
   SecondlySkillsChart,
+  TalkList,
 } from "../components";
 
 
@@ -44,6 +45,11 @@ export default class App extends Component {
         <Section name="SecondlySkills">
           <SecondlySkillsChart
             skills={this.state.secondlySkills}
+          />
+        </Section>
+        <Section name="Talks" title="Talks">
+          <TalkList
+            talks={this.state.talks}
           />
         </Section>
       </div>

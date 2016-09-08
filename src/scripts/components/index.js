@@ -3,6 +3,7 @@ import Section              from "./Section";
 import ContributionGraph    from "./ContributionGraph";
 import PrimarySkillsChart   from "./PrimarySkillsChart";
 import SecondlySkillsChart  from "./SecondlySkillsChart";
+import TalkList             from "./TalkList";
 
 export {
   Header,
@@ -10,4 +11,5 @@ export {
   ContributionGraph,
   PrimarySkillsChart,
   SecondlySkillsChart,
+  TalkList,
 };

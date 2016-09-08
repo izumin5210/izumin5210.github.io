@@ -14,4 +14,8 @@
     font-weight: normal;
     border-bottom: 1px solid var(--color-text);
   }
+
+  --page-content: {
+    margin: 0 auto;
+  }
 }

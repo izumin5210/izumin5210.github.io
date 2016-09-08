@@ -1,0 +1,57 @@
+/** @define Talks */
+
+.Talks {
+  @apply --page;
+}
+
+.Talks__title {
+  @apply --page-title;
+}
+
+.Talks__list {
+  @apply --page-content;
+
+  color: var(--color-text);
+  text-align: center;
+  line-height: 2.4;
+
+  @nest & dd {
+    margin: 0;
+  }
+}
+
+.Talks__itemTitle,
+.Talks__itemEvent,
+.Talks__itemDate {
+  display: inline;
+}
+
+.Talks__itemTitle {
+  &::before {
+    content: "\"";
+    margin-right: 2px;
+  }
+
+  &::after {
+    content: "\", ";
+    margin-right: 2px;
+  }
+}
+
+.Talks__itemEvent {
+  &::after {
+    content: ", ";
+    margin-right: 2px;
+  }
+}
+
+.Talks__itemDate {
+  &::after {
+    content: "";
+    display: block;
+  }
+}
+
+.Talks__moreTalks {
+  text-align: center;
+}

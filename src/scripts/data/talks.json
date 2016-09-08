@@ -1,0 +1,20 @@
+[
+  {
+    "title": "API server/client development using JSON Schema",
+    "url": "http://speakerdeck.com/izumin5210/client-development-using-json-schema-number-kanrk06",
+    "event": {
+      "name": "Kansai RubyKaigi 06",
+      "url": "http://regional.rubykaigi.org/kansai06/"
+    },
+    "talkedOn": "2015-07-11"
+  },
+  {
+    "title": "What's the difference between JavaScript and Java?",
+    "url": "https://speakerdeck.com/izumin5210/whats-the-difference-between-javascript-and-java",
+    "event": {
+      "name": "DroidKaigi 2016",
+      "url": "https://droidkaigi.github.io/2016/"
+    },
+    "talkedOn": "2016-02-19"
+  }
+]
