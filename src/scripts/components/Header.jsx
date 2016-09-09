@@ -6,7 +6,7 @@ export default function Header(props) {
     <li key={`${componentName}__description__item${i}`}>{d}</li>
   ));
   return (
-    <header className={componentName}>
+    <header className={componentName} style={props.style}>
       <div className={`${componentName}__profile`}>
         <figure className={`${componentName}__icon`}>
           <img src={props.icon} alt={props.name} />
@@ -28,4 +28,5 @@ Header.propTypes = {
   icon: PropTypes.string.isRequired,
   description: PropTypes.arrayOf(PropTypes.string).isRequired,
   children: PropTypes.node,
+  style: PropTypes.object,
 };
