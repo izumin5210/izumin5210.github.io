@@ -53,6 +53,7 @@
     "gulp-postcss": "^6.1.1",
     "gulp-size": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-watch": "^4.3.9",
     "licensify": "^3.1.2",
     "postcss-apply": "^0.3.0",
     "postcss-calc": "^5.3.1",

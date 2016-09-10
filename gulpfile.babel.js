@@ -138,9 +138,9 @@ gulp.task("serve", ["build", "watchify"], () => {
     port: process.env.PORT || 3000
   });
 
-  gulp.watch([path.join(config.src, "/**/*.html")], ["build:html", reload]);
-  gulp.watch([path.join(config.src, "/styles/**/*.css")], ["build:styles", reload]);
-  gulp.watch([path.join(config.src, "/images/**/*")], ["build:images", reload]);
+  $.watch([path.join(config.src, "/**/*.html")], () => gulp.start(["build:html"]));
+  $.watch([path.join(config.src, "/styles/**/*.css")], () => gulp.start(["build:styles"]));
+  $.watch([path.join(config.src, "/images/**/*")], () => gulp.start(["build:images"]));
 });
 
 gulp.task('clean', () => del([config.dest, `!${path.join(config.dest, ".git")}`], { dot: true }));
