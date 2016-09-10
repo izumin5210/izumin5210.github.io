@@ -46,12 +46,18 @@ const getBundler = opts => {
     extensions: [".js", ".jsx", ".json"]
   };
 
-  return browserify(browserifyOpts)
+  const bundler = browserify(browserifyOpts)
     .transform({ continuous: true }, eslintify)
     .transform(envify)
     .transform(babelify)
-    .plugin(licensify)
-    .transform({ global: true }, uglifyify);
+
+  if (!opts.debug) {
+    bundler
+      .plugin(licensify)
+      .transform({ global: true }, uglifyify);
+  }
+
+  return bundler;
 };
 
 const bundle = (opts) => {
